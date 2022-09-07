@@ -4,5 +4,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def movie():
-    return 
-    
+    return "<p>Movies list</p>"
