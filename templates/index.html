@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskApp</title>
+</head>
+<body>
+    <h1>Welcome to EasyFilm!</h1>
+    <label for="inputMovieTitle">Voir les acteurs nés aujourd'hui</label>
+    {% for actor in listActors %}
+        <li><a href="https://google.com">{{actor}}</a></li>
+    {% endfor %}
+</body>
+</html> 
