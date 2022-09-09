@@ -8,6 +8,14 @@ app = Flask(__name__)
 def movie():
     return "<p>Movies list</p>"
 
+def requete(strReq) :
+    conn.request("GET", strReq, headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    list_data = data.decode("utf-8")
+    json_data = json.loads(list_data)
+    return json_data
+
 
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 
@@ -16,47 +24,29 @@ headers = {
     'X-RapidAPI-Host': "imdb8.p.rapidapi.com"
     }
 # Obtenir la liste des id des acteurs nés aujourd'hui :
-conn.request("GET", "/actors/list-born-today?month=7&day=27", headers=headers)
 
-res = conn.getresponse()
-data = res.read()
-
-list_id = data.decode("utf-8")
-
-x = json.loads(list_id)
+x = requete("/actors/list-born-today?month=7&day=27")
 
 dict_name = {}
 
-# Obtenir nom prénom des acteurs à partir de leur id :
+# Obtenir nom prénom des acteurs à partir de leur id et les placer dans un dict :
 for id in x[:1] :
 
     id = id.split('/')[-2]
-    conn.request("GET", "/actors/get-bio?nconst=" + str(id), headers=headers)
-    res = conn.getresponse()
-    data = res.read()
-    list_bio = data.decode("utf-8")
-    json_bio= json.loads(list_bio)
+
+    json_bio = requete("/actors/get-bio?nconst=" + str(id))
     name = json_bio['name']
     dict_name[id] = name
 
 print(dict_name)
 
-id = x[3].split('/')[-2]
+id = x[3].split('/')[-2] # Pour ne garder que la partie où on a l'id.
 
 print('id = ' +str(id) + '\n')
 
 # Obtenir award, détail d'un acteur, image à partir de son id (et afficher son nom, prénom)
+json_awards = requete("/actors/get-awards-summary?nconst=" + str(id))
 
-conn.request("GET", "/actors/get-awards-summary?nconst=" + str(id), headers=headers)
-
-res = conn.getresponse()
-data = res.read()
-
-#Récupérer les award
-
-awards = data.decode("utf-8")
-
-json_awards= json.loads(awards)
 #name = json_bio['name']
 try:
     print(json_awards['awardsSummary']['highlighted']['awardName'])
@@ -69,12 +59,7 @@ except KeyError:
 print('\n')
 
 # Photo acteur :
-conn.request("GET", "/actors/get-bio?nconst=" + str(id), headers=headers)
-res = conn.getresponse()
-
-data = res.read()
-detail = data.decode("utf-8")
-json_detail= json.loads(awards)
+json_detail = requete("/actors/get-bio?nconst=" + str(id))
 url_image = json_detail['image']['url']
 
 print('\n')
