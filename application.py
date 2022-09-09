@@ -78,8 +78,24 @@ def title(strReq) :
     json_title = requete(strReq)
     json_title = json_title[:5]
     json_title = list(map(lambda x : x.split('/')[-2] , json_title))
-    return json_title
+    dict_detail = {}
 
+    for id in json_title :
+        detail = detail_movie("/title/get-details?tconst="+str(id))
+        dict_detail[id] = detail
+    return dict_detail
+
+def detail_movie(strReq) :
+
+    list_movie = []
+    movie = requete(strReq)
+    titre = movie['title']
+    typetitre = movie['titleType']
+    year = movie['year']
+    url = movie['image']['url']
+    list_movie = [titre,typetitre,year,url]
+    
+    return list_movie
 
 dict_name, id = actors("/actors/list-born-today?month=7&day=27")
 
@@ -87,7 +103,9 @@ award = awards("/actors/get-awards-summary?nconst=" + str(id))
 
 url_image = photo("/actors/get-bio?nconst=" + str(id))
 
-json_title = title("/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US")
+dict_detail = title("/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US")
+
+#titre,typetitre,year,url = detail_movie("/title/get-details?tconst=tt0944947")
 
 print(id + '\n')
 
@@ -95,5 +113,6 @@ print(award + '\n')
 
 print(url_image + '\n')
 
-print(json_title)
+print(dict_detail)
+
 
