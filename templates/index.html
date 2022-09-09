@@ -7,8 +7,10 @@
 <body>
     <h1>Welcome to EasyFilm!</h1>
     <label for="inputMovieTitle">Voir les acteurs nés aujourd'hui</label>
-    {% for actor in listActors %}
-        <li><a href="https://google.com">{{actor}}</a></li>
+
+    {% for id,name in dictActors.items() %}
+        <li><a href="{{id}}">{{name}}</a></li>  
+        <p>{{id}}</p>
     {% endfor %}
 </body>
 </html> 

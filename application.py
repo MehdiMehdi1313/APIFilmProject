@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 import http.client
 import json
@@ -7,48 +7,61 @@ app = Flask(__name__)
 
 @app.route("/")
 def movie():
-    return render_template('index.html', listActors=displayActorsName())
+    return render_template('index.html', dictActors=displayActorsName())
 
+conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
+
+
+headers = {
+        "X-RapidAPI-Key": "2291b34504msh32e737e169ea76ap1def00jsn4ee3554760e2",
+        "X-RapidAPI-Host": "imdb8.p.rapidapi.com"
+    }
+
+def requete(strReq) :
+    conn.request("GET", strReq, headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    list_data = data.decode("utf-8")
+    json_data = json.loads(list_data)
+    return json_data
 
 # Fonction qui fourni en sortie le nom de chaque acteur né aujourd'hui
 def displayActorsName():
     
-
-    conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
-
-
-    headers = {
-        "X-RapidAPI-Key": "f734e1d237mshcbadac401f1ca46p1b2084jsn68dca2e76611",
-        "X-RapidAPI-Host": "imdb8.p.rapidapi.com"
-    }
-
     #  Obtenir la liste des id des acteurs nés aujourd'hui :
-    conn.request("GET", "/actors/list-born-today?month=7&day=27", headers=headers)
-
-    res = conn.getresponse()
-    
-    data = res.read()
-
-    list_id = data.decode("utf-8")
-
-    x = json.loads(list_id)
+    x = requete("/actors/list-born-today?month=7&day=27")
 
     dict_name = {}
 
     # Obtenir nom prénom des acteurs à partir de leur id :
-    for id in x :
+    for id in x[:10]:
 
         id = id.split('/')[-2]
-        conn.request("GET", "/actors/get-bio?nconst=" + str(id), headers=headers)
-        res = conn.getresponse()
-        data = res.read()
-        list_bio = data.decode("utf-8")
-        json_bio= json.loads(list_bio)
+        json_bio = requete("/actors/get-bio?nconst=" + str(id))
         name = json_bio['name']
         dict_name[id] = name
 
     id = x[3].split('/')[-2]
-    my_list = list(dict_name.values())
-    return my_list
+    return dict_name
+
+# Obtenir award, détail d'un acteur, image à partir de son id (et afficher son nom, prénom)
+@app.route("/<id>")
+def awards(id) :
+    json_awards = requete("/actors/get-awards-summary?nconst="+str(id))
+
+    try:
+        award = json_awards['awardsSummary']['highlighted']['awardName']
+        
+    except KeyError:
+        award = "Pas d'award"
+
+    return "<h2>Les awards de l'acteur :</h2><p>- "+award+"</p>"
+
+
+
+
+
+
+
 
 
