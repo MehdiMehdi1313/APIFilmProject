@@ -1,0 +1,13 @@
+#gauche {
+	width: 50%;
+	height: 100%;
+	float: left;
+	background-color: red;
+}
+
+#droite {
+	width: 50%;
+	height: 100%;
+	float: right;
+}
+

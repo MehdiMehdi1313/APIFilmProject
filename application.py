@@ -34,7 +34,7 @@ def displayActorsName():
     dict_name = {}
 
     # Obtenir nom prénom des acteurs à partir de leur id :
-    for id in x[:10]:
+    for id in x[:1]:
 
         id = id.split('/')[-2]
         json_bio = requete("/actors/get-bio?nconst=" + str(id))
@@ -46,7 +46,15 @@ def displayActorsName():
 
 # Obtenir award, détail d'un acteur, image à partir de son id (et afficher son nom, prénom)
 @app.route("/<id>")
-def awards(id) :
+def detailsActor(id) :
+    award = awards(id)
+    url_image = photo(id)
+
+    contentToDisplay = "<h2>Les awards de l'acteur :</h2><li>- "+award+"</li>"+"<h2>Sa photo :</h2>"+"<img src='"+url_image+"' alt='image auteur'/>"
+
+    return contentToDisplay
+
+def awards(id):
     json_awards = requete("/actors/get-awards-summary?nconst="+str(id))
 
     try:
@@ -55,10 +63,15 @@ def awards(id) :
     except KeyError:
         award = "Pas d'award"
 
-    return "<h2>Les awards de l'acteur :</h2><p>- "+award+"</p>"
+    return award
 
+#Obtenir photo d'un acteur à partir de son id
+def photo(id) :
+    json_detail = requete("/actors/get-bio?nconst=" + str(id))
 
+    url_image = json_detail['image']['url']
 
+    return url_image
 
 
 
