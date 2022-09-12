@@ -20,7 +20,7 @@ def requete(strReq) :
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 
 headers = {
-    'X-RapidAPI-Key': "2291b34504msh32e737e169ea76ap1def00jsn4ee3554760e2",
+    'X-RapidAPI-Key': "36399bca7cmsh8058661afeea291p176ed4jsnf349415e3b42",
     'X-RapidAPI-Host': "imdb8.p.rapidapi.com"
     }
 
@@ -28,6 +28,8 @@ headers = {
 def actors(strReq) :
 
     x = requete(strReq)
+    print(x)
+    print('\n')
 
     dict_name = {}
 
@@ -79,11 +81,13 @@ def title(strReq) :
     json_title = json_title[:5]
     json_title = list(map(lambda x : x.split('/')[-2] , json_title))
     dict_detail = {}
+    liste_titre = []
 
     for id in json_title :
-        detail = detail_movie("/title/get-details?tconst="+str(id))
+        detail,titre = detail_movie("/title/get-details?tconst="+str(id))
         dict_detail[id] = detail
-    return dict_detail
+        liste_titre.append(titre)
+    return dict_detail,liste_titre
 
 def detail_movie(strReq) :
 
@@ -95,7 +99,7 @@ def detail_movie(strReq) :
     url = movie['image']['url']
     list_movie = [titre,typetitre,year,url]
     
-    return list_movie
+    return list_movie,titre
 
 dict_name, id = actors("/actors/list-born-today?month=7&day=27")
 
@@ -103,7 +107,7 @@ award = awards("/actors/get-awards-summary?nconst=" + str(id))
 
 url_image = photo("/actors/get-bio?nconst=" + str(id))
 
-dict_detail = title("/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US")
+dict_detail,liste_titre = title("/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US")
 
 #titre,typetitre,year,url = detail_movie("/title/get-details?tconst=tt0944947")
 
@@ -114,5 +118,9 @@ print(award + '\n')
 print(url_image + '\n')
 
 print(dict_detail)
+
+print(liste_titre)
+
+
 
 
