@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import http.client
 import json
+import datetime
 
 app = Flask(__name__)
 
@@ -101,7 +102,12 @@ def detail_movie(strReq) :
     
     return list_movie,titre
 
-dict_name, id = actors("/actors/list-born-today?month=7&day=27")
+x = datetime.datetime.now()
+
+day = x.strftime("%d")
+month = x.strftime("%m")
+
+dict_name, id = actors("/actors/list-born-today?month={0}&day={1}".format(month,day))
 
 award = awards("/actors/get-awards-summary?nconst=" + str(id))
 
