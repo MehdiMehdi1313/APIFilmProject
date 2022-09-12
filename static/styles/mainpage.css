@@ -1,13 +1,17 @@
-#gauche {
-	width: 50%;
-	height: 100%;
-	float: left;
-	background-color: red;
+main{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: top;
 }
 
-#droite {
-	width: 50%;
-	height: 100%;
-	float: right;
+main>div
+{
+	width: 50vw;
+}
+
+#title
+{
+	background-color:rgb(236, 166, 13);
 }
 
