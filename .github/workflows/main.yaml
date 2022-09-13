@@ -24,7 +24,8 @@ jobs:
 
       - name: Test des features de la page Web
         run: |
-          set FLASK_APP application.py
+          export FLASK_ENV=development
+          export FLASK_APP=application.py
           flask run 
           python application.py
 
