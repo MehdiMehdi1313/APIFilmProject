@@ -30,7 +30,7 @@ def requete(strReq):
     json_data = json.loads(list_data)
     return json_data
 
-# Fonction qui fourni en sortie le nom de chaque acteur né aujourd'hui
+# Fonction qui fournit en sortie le nom de chaque acteur né aujourd'hui
 
 
 def displayActorsName():
@@ -68,7 +68,7 @@ def detailsActor(id):
 
     return contentToDisplay
 
-# Méthode qui fourni les récompenses qu'à obtenu un acteur grâce à son id
+# Méthode qui fournit les récompenses obtenues par un acteur grâce à son id
 
 
 def awards(id):
@@ -91,7 +91,7 @@ def photo(id):
 
     return url_image
 
-# Fourni les id de films populaires et leur titre associés
+# Fournit les id de films populaires et leur titre associé
 
 
 def title():
