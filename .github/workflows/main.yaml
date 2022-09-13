@@ -2,9 +2,9 @@ name: Push the Docker image
 
 on:
   push:
-    branches: [ci]
+    branches: [new_ci]
   pull_request:
-    branches: [ci]
+    branches: [new_ci]
 
 jobs:
   build:
