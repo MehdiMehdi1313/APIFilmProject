@@ -24,7 +24,7 @@ jobs:
 
       - name: Test des features de la page Web
         run: |
-          setx FLASK_APP application.py
+          set FLASK_APP application.py
           flask run 
           python application.py
 
