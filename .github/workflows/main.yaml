@@ -23,9 +23,7 @@ jobs:
         run: docker build --tag apifilmproject .
 
       - name: Test des features de la page Web
-        run: |
-          flask run 
-          python application.py
+        run: python test_application.py
 
       - name: Push into Docker Hub
         #run: docker push randilt/flask-github-actions-app
