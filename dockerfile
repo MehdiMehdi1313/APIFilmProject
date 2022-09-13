@@ -1,5 +1,13 @@
 FROM python:3
-WORKDIR E:\IMT\S9\APIFilmProject
-ADD application.py /
+COPY . /app
+WORKDIR /app
 
-CMD ["setx", "FLASK_APP", "application.py", "flask", "run"]
+#ADD application.py /
+
+#RUN setx FLASK_APP application.py
+RUN pip install -r requirements.txt
+
+EXPOSE 8080
+#CMD ["setx", "FLASK_APP", "application.py", "flask", "run"]
+ENTRYPOINT [ "python" ]
+CMD [ "application.py" ]
