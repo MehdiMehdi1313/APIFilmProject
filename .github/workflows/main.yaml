@@ -24,11 +24,9 @@ jobs:
 
       - name: Test des features de la page Web
         run: |
-          pip install flask
           export FLASK_ENV=development
           export FLASK_APP=application.py
-          flask run 
-          python application.py
+          python test_application.py
 
       - name: Push into Docker Hub
         #run: docker push randilt/flask-github-actions-app
