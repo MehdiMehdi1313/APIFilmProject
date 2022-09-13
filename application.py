@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 import http.client
 import json
 import datetime
@@ -15,7 +15,7 @@ conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 
 
 headers = {
-    "X-RapidAPI-Key": "36399bca7cmsh8058661afeea291p176ed4jsnf349415e3b42",
+    "X-RapidAPI-Key": "61cd6e2771msh4978653e06ce39dp17ee4djsn76e9c46c6504",
     "X-RapidAPI-Host": "imdb8.p.rapidapi.com"
 }
 
