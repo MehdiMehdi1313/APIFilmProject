@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>FlaskApp</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+</head>
+<body>
+    <h1 id="title" style="text-align: center">Welcome to EasyFilm!</h1>
+<main>
+    <div>
+        <h2>Voici les acteurs nés aujourd'hui</h2>
+
+        {% for id,name in dictActors.items() %}
+            <li><a href="{{id}}">{{name}}</a></li>  
+        {% endfor %}
+
+    </div>
+    <div>
+        <h2>Les films les + populaires</h2>
+        {% for id,title in listFilm.items() %}
+            <li>{{title}}</li>  
+        {% endfor %}
+    </div>
+</main>
+</body>
+</html> 

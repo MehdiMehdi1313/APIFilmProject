@@ -1,0 +1,17 @@
+main{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: top;
+}
+
+main>div
+{
+	width: 50vw;
+}
+
+#title
+{
+	background-color:rgb(236, 166, 13);
+}
+
