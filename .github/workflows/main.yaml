@@ -22,6 +22,9 @@ jobs:
         #run: docker build . --file Dockerfile --tag randilt/flask-github-actions-app
         run: docker build --tag apifilmproject .
 
+      - name: Run du container
+        run: docker run --name apifilmproject -p 5001:5001 apifilmproject
+
       - name: Test des features de la page Web
         run: |
           export FLASK_ENV=development
