@@ -66,14 +66,13 @@ def awards(id):
         award = json_awards['awardsSummary']['highlighted']['awardName']
         
     except KeyError:
-        award = "Pas d'award"
+        award = "Pas d'award attribué"
 
     return award
 
 #Obtenir photo d'un acteur à partir de son id
 def photo(id) :
     json_detail = requete("/actors/get-bio?nconst=" + str(id))
-
     url_image = json_detail['image']['url']
 
     return url_image
@@ -87,12 +86,13 @@ def title() :
     dict_detail = {}
 
     for id in json_title :
-        titre = detail_movie("/title/get-details?tconst="+str(id))
+        titre = title_movie("/title/get-details?tconst="+str(id))
         dict_detail[id] = titre
+
     return dict_detail
 
 #Méthode qui retourne le titre d'un film en fonction de son id
-def detail_movie(strReq) :
+def title_movie(strReq) :
 
     movie = requete(strReq)
     titre = movie['title']
