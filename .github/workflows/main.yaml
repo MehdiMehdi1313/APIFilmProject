@@ -1,0 +1,30 @@
+name: Push the Docker image
+
+on:
+  push:
+    branches: [ci]
+  pull_request:
+    branches: [ci]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log in to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Build Docker image
+        #run: docker build . --file Dockerfile --tag randilt/flask-github-actions-app
+        run: docker build --tag apifilmproject .
+
+      - name: Test des features de la page Web
+        run: python3 test_application.py
+
+      - name: Push into Docker Hub
+        #run: docker push randilt/flask-github-actions-app
+        run: docker push mehdidi13/apifilmproject
