@@ -5,7 +5,7 @@ on:
     branches: [new_ci]
   pull_request:
     branches: [new_ci]
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,13 +33,19 @@ jobs:
           python test_application.py
 
   publish:
-    needs : [ build , test ]
+    needs: [build, test]
     runs-on: ubuntu-latest
     steps:
       - uses: docker/build-push-action@v2
+      - name: Log in to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker logout
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
       - name: Build and Push into Docker Hub
         run: |
           docker build . -t mehdidi13/apifilmproject
           docker push mehdidi13/apifilmproject
-
-
