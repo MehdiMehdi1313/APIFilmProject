@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: Log in to Docker Hub
@@ -18,15 +17,30 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-      - name: Run du container
-        run: |
-          export FLASK_ENV=development
-          export FLASK_APP=application.py
-          pip install flask
-          python application.py &
-          python test_application.py
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+    - name: Run du container
+      run: |
+        export FLASK_ENV=development
+        export FLASK_APP=application.py
+        pip install flask
+        python application.py &
+        python test_application.py
 
-      - name: Build and Push into Docker Hub
-        run: |
-          docker build . -t mehdidi13/apifilmproject
-          docker push mehdidi13/apifilmproject
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+    - name: Build and Push into Docker Hub
+      run: |
+        docker build . -t mehdidi13/apifilmproject
+        docker push mehdidi13/apifilmproject
+
+workflows:
+  test_deploy:
+    jobs:
+      -build
+      -test
+      -publish
