@@ -28,5 +28,5 @@ jobs:
 
       - name: Build and Push into Docker Hub
         run: |
-          docker build --tag apifilmproject .
+          docker build . -t mehdidi13/apifilmproject
           docker push mehdidi13/apifilmproject
