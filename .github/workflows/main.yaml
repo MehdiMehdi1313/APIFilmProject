@@ -18,9 +18,6 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-      - name: Build Docker image
-        run: docker build --tag apifilmproject .
-
       - name: Run du container
         run: |
           export FLASK_ENV=development
@@ -29,5 +26,7 @@ jobs:
           python application.py &
           python test_application.py
 
-      - name: Push into Docker Hub
-        run: docker push mehdidi13/apifilmproject
+      - name: Build and Push into Docker Hub
+        run: |
+          docker build --tag apifilmproject .
+          docker push mehdidi13/apifilmproject
