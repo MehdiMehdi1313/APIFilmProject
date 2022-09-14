@@ -30,6 +30,6 @@ jobs:
           run: |
             docker logout
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker build ${{ secrets.DOCKER_USERNAME }}/apifilmproject
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/apifilmproject .
             docker image push ${{ secrets.DOCKER_USERNAME }}/apifilmproject
   
