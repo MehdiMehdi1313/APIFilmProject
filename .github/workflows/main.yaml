@@ -36,7 +36,7 @@ jobs:
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
-      - uses: checkout
+      - uses: docker/build-push-action@v3
       - run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build . -t ${{ secrets.DOCKER_USERNAME }}/apifilmproject:tagname
