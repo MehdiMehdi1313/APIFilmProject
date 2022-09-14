@@ -30,6 +30,6 @@ jobs:
           run: |
             docker logout
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker build . $DOCKER_LOGIN/apifilmproject
+            docker build $DOCKER_LOGIN/apifilmproject
             docker image push $DOCKER_LOGIN/apifilmproject
   
