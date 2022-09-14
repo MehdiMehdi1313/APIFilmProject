@@ -25,6 +25,7 @@ jobs:
         run: |
           export FLASK_ENV=development
           export FLASK_APP=application.py
+          pip install flask
           python application.py &
           python test_application.py
 
