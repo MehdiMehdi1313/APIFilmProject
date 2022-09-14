@@ -15,7 +15,7 @@ conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 
 
 headers = {
-    "X-RapidAPI-Key": "61cd6e2771msh4978653e06ce39dp17ee4djsn76e9c46c6504",
+    "X-RapidAPI-Key": "71d08ccdbdmshdb55338d4859e1fp196e2ajsnab61f3412cd3",
     "X-RapidAPI-Host": "imdb8.p.rapidapi.com"
 }
 
@@ -121,3 +121,4 @@ def title_movie(strReq):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
+    # app.run(debug=True)
