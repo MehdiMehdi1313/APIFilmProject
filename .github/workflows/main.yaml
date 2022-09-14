@@ -15,7 +15,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
   test:
     needs: build
@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Test the app
-      - run: |
+        run: |
           export FLASK_ENV=development
           export FLASK_APP=application.py
           pip install flask
@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build and Push into Docker Hub
-      - run: |
+        run: |
           docker build . -t mehdidi13/apifilmproject
           docker push mehdidi13/apifilmproject
 
