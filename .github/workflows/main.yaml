@@ -27,7 +27,7 @@ jobs:
           env:
             DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        - run: |
+          run: |
             docker logout
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker build . -t $DOCKER_LOGIN/apifilmproject:tagname
