@@ -21,10 +21,17 @@ jobs:
       - name: Build Docker image
         run: docker build --tag apifilmproject .
 
-      - name: Test Valzer
+      - name: Run du container
         run: |
-          sudo apt-get install python
-          python3 test_application.py
+          export FLASK_ENV=development
+          export FLASK_APP=application.py
+          docker run --name apifilmproject -p 5001:5001 apifilmproject
+          docker run -p 5001:5001 -d mehdidi13/apifilmproject &
+
+      - name: Test des features de la page Web
+        run: |
+        python test_application.py
+        python -m unittest discover "test_application.py"
 
       - name: Push into Docker Hub
         run: docker push mehdidi13/apifilmproject
