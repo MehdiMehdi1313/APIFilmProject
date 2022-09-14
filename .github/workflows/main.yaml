@@ -21,6 +21,7 @@ jobs:
 
 
   docker:
+      needs: test
       runs-on: ubuntu-latest
       steps:
         -
@@ -46,17 +47,4 @@ jobs:
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/apifilmproject:latest
           
-  build:
-      needs: test
-      runs-on: ubuntu-latest
-      steps:
-        - name: Log in to Docker Hub
-          env:
-            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          run: |
-            docker logout
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker build -t ${{ secrets.DOCKER_USERNAME }}/apifilmproject .
-            docker image push ${{ secrets.DOCKER_USERNAME }}/apifilmproject
   
