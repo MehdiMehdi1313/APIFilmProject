@@ -19,19 +19,12 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Build Docker image
-        #run: docker build . --file Dockerfile --tag randilt/flask-github-actions-app
         run: docker build --tag apifilmproject .
 
-      - name: Run du container
+      - name: Test Valzer
         run: |
-          export FLASK_ENV=development
-          export FLASK_APP=application.py
-          docker run --name apifilmproject -p 5001:5001 apifilmproject
-
-      - name: Test des features de la page Web
-        run: |
-          python test_application.py
+          sudo apt-get install python
+          python3 test_application.py
 
       - name: Push into Docker Hub
-        #run: docker push randilt/flask-github-actions-app
         run: docker push mehdidi13/apifilmproject
