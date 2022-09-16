@@ -22,7 +22,7 @@ It can take a few secondes because several API requests are sent during the load
 
 ![My Image](./images/HomePage.png)
 
-On this page, we can 2 of our features. The first one display actors that are born today and the second one show us the popular movie of the moment.
+On this page, we can 2 of our features. The first one display actors that are born today and the second one show us the popular movies of the moment.
 
 We can now click on an actor (for example Tom Hardy) and this page will appear 
 
