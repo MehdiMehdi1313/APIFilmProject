@@ -30,4 +30,10 @@ We can now click on an actor (for example Tom Hardy) and this page will appear
 
 Here, we can see our 2 last features. In fact, the third one displays the awards of the actor and the last one displays a picture of the actor.
 
+Our CI/CD chain
+
+This one is composed with 2 jobs :
+
+![My Image](./images/TomHardy.png)
+
 
