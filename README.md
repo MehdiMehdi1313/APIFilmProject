@@ -34,6 +34,9 @@ Our CI/CD chain
 
 This one is composed with 2 jobs :
 
-![My Image](./images/TomHardy.png)
+![My Image](./images/chaineCICD.png)
 
+The first one will launch our unit tests. We have 5 unit tests : 4 to test our features (API requests) and the last one to test one method in our code.
+
+If these 5 tests are OK then we go to the next job. This one will put our app in a Docker container and publish this one on docker hub if everything works.
 
