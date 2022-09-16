@@ -1,6 +1,8 @@
 # APIFilmProject
 
-To launch in terminal
+To launch locally in terminal
+
+Clone this project and then open a terminal, move in the projet folder and execute the following commands :
 
 ```bash 
 pip install -r requirements.txt
