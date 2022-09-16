@@ -22,12 +22,12 @@ It can take a few secondes because several API requests are sent during the load
 
 ![My Image](./images/HomePage.png)
 
-On this page, we can 2 of our features. The first one display actors that are born today and the second one show us the popular movies of the moment.
+On this page, we can find 2 of our features. The first one display actors that are born today and the second one show us the popular movies of the moment.
 
 We can now click on an actor (for example Tom Hardy) and this page will appear 
 
 ![My Image](./images/TomHardy.png)
 
-Here, we can see our 2 last features. In fact, the third one diplay the wards of the actor and the last one display a picture of the actor.
+Here, we can see our 2 last features. In fact, the third one displays the awards of the actor and the last one displays a picture of the actor.
 
 
