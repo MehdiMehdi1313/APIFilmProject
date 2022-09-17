@@ -20,7 +20,7 @@ jobs:
           python test_application.py
 
   dockerisation:
-    needs: test
+    needs: application_test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
